@@ -1,0 +1,14 @@
+*About this project
+  This is an example for creating interpreter by Python.
+  It aims :
+    - "To know how to implement" interpreter with easy examples
+    - "To know how to implement" C interpreter
+    - "To know how to implement" interpreter by Python
+
+*About me
+   I'm a master student of Tokyo Institute of Technology, TITECH.
+  and am not good at English very much so I have no confident to
+  describe concrete and precise information to you ;-(
+   Some of documents will be described in Japanese....sorry;
+
+
