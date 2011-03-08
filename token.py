@@ -21,12 +21,12 @@ TEXT_SIZ = 100
 KEYWORD_DICT = {}
 KIND_DICT = {}
 
-KEYWORDS =\ 
+KEYWORDS = \
 ("Void","Int","If","Else","For","While","Do","Switch","Case","Default","Break","Continue"\
 ,"Return","Printf","Input","Exit","Lparen","Rparen","Lbrace","Rbrace","Lbracket"\
 ,"Rbracket","Plus","Minus","Multi","Divi","Incre","Decre","Equal","NotEq","Less"\
 ,"LessEq","Great","GreatEq","And","Or","Not","Mod","Colon","Semicolon","Assign"\
-,"Sharp","Yen","Comma","SngQ","DblQ","END_KeyList")
+,"Sharp","Yen","Comma","SngQ","DblQ","END_list","Others","Digit","Letter","Puts")
 
 map( lambda x: KIND_DICT.setdefault(KEYWORDS[x],x) , xrange(0,len(KEYWORDS)) )
 del(KEYWORDS)
@@ -92,8 +92,12 @@ that produces lines of text ).
 
 """
 class Tokenizer:
-  # Kind table
-  ctyp = []
+  """
+    Constructor. It requires iterator which provides lines of text data.
+  """
+  def __init__(self,it):
+    self.fp = it
+    self.line_no = 0 
 
   """
     Retrieve next token
@@ -104,7 +108,8 @@ class Tokenizer:
   """
     Retrieve one charactor from passed iterator.
   """
-  def next_ch(self):
+  def next_ch(self): 
+    
     pass
 
   """
@@ -122,7 +127,7 @@ class Tokenizer:
   """
     It returns next token when tk.kind == kd, or returns tk
   """
-  def chk_next_tkn(seflf,tk,kd):
+  def chk_next_tkn(self,tk,kd):
     pass
 
   """
@@ -130,3 +135,23 @@ class Tokenizer:
   """
   def get_line_no(self):
     pass
+
+  """
+    Make iterator which has a function that increases self.line_no 
+    when it calls automatically.  
+  """
+  def get_line(self):
+    try:
+      line = self.fp.next()
+      self.line_no += 1
+      return line.decode('utf-8')
+    except StopIteration:
+      return u""
+
+  def get_char(self):
+    while True:
+      line = self.get_line()
+      if len(line) == 0: 
+        raise StopIteration
+      for c in line:
+        yield c

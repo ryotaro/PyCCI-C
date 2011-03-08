@@ -1,0 +1,7 @@
+int x = 100;
+int y = 200;
+
+void test_func(void)
+{
+  int z = x + y;
+}
