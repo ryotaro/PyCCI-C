@@ -96,8 +96,9 @@ class Tokenizer:
     Constructor. It requires iterator which provides lines of text data.
   """
   def __init__(self,it):
-    self.fp = it
-    self.line_no = 0 
+    self.fp = it    # File or something which has iterator interface.
+    self.line_no = 0 # Line number which this program reads now
+    self.ch = u"" # To possess previous charactor for self.next_ch
 
   """
     Retrieve next token
@@ -107,10 +108,37 @@ class Tokenizer:
   
   """
     Retrieve one charactor from passed iterator.
+    With function to reduce comment and white space.
   """
   def next_ch(self): 
-    
-    pass
+    prev_ch = self.ch
+    commenting = None
+    for self.ch in self.get_char():
+      # c represents one charactor 
+
+      # Commenting Check
+      if prev_ch == u'/':
+        # beginning of comment
+        if self.ch == u'*':
+          # Area comment start
+          commenting = u"Area"
+        elif self.ch == u'/':
+          # One line comment start
+          commenting = u"Line"
+
+      elif prev_ch == u'*':
+        # It may end of comment?
+        if self.ch == u'/':
+          # Area comment end
+          commenting = None
+
+      if self.ch == u'\n':
+        # Line comment will end!
+        if commenting == u"Line":
+          commenting = None
+      
+    # It ends when all files are read.
+    return u""
 
   """
     Check whether this two arguments can be represented in double operands
@@ -137,8 +165,8 @@ class Tokenizer:
     pass
 
   """
-    Make iterator which has a function that increases self.line_no 
-    when it calls automatically.  
+    It retrieves a line of self.fp and has a function that increases self.line_no 
+    automatically when it calls .  
   """
   def get_line(self):
     try:
@@ -148,6 +176,9 @@ class Tokenizer:
     except StopIteration:
       return u""
 
+  """
+    It generates generator which produces one character from passed data.
+  """
   def get_char(self):
     while True:
       line = self.get_line()
