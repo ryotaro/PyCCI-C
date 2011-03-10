@@ -26,6 +26,7 @@ class TokenizerFileTreatingTest( unittest.TestCase ):
     c_iter = self.tokenizer.get_char()
     for c in c_iter:
       print c,
+
     
 suite = unittest.makeSuite( TokenizerFileTreatingTest )
 tr = unittest.TextTestRunner().run(suite)

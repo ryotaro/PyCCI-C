@@ -1,7 +1,12 @@
 int x = 100;
 int y = 200;
 
+/*
+Today is good day.
+But I can't imagine whether tomorrow is good day, too.
+   */
 void test_func(void)
 {
+  // add x and y and then put the result to z.
   int z = x + y;
 }

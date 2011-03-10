@@ -137,6 +137,10 @@ class Tokenizer:
         if commenting == u"Line":
           commenting = None
       
+      if commenting != None:
+        continue
+      else:
+        return self.ch
     # It ends when all files are read.
     return u""
 
